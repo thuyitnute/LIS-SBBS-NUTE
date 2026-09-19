@@ -1,34 +1,68 @@
 """
 LIS Reasoning Engine
 
-Provides a basic reasoning layer
-for processing tasks and knowledge.
+Provides reasoning capability
+based on LIS Knowledge Graph.
 """
 
 
 from typing import List
 
+from app.knowledge.graph import KnowledgeGraph
+
+
 
 class ReasoningEngine:
     """
-    Basic reasoning engine of LIS.
+    Reasoning engine using Knowledge Graph.
     """
 
 
-    def __init__(self):
+    def __init__(
+        self,
+        knowledge_graph: KnowledgeGraph
+    ):
+        self.knowledge_graph = knowledge_graph
         self.history: List[str] = []
 
 
-    def analyze(self, task: str) -> str:
+    def analyze(
+        self,
+        task: str,
+        atom_id: str = ""
+    ) -> str:
         """
-        Analyze a task and produce
-        a reasoning result.
+        Analyze task with knowledge context.
         """
 
         self.history.append(task)
 
+        knowledge_context = []
+
+
+        if atom_id:
+
+            related_atoms = (
+                self.knowledge_graph
+                .get_related(atom_id)
+            )
+
+            knowledge_context.extend(
+                related_atoms
+            )
+
+
+        if knowledge_context:
+
+            return (
+                f"Reasoning completed for task: {task}\n"
+                f"Knowledge context: {knowledge_context}"
+            )
+
+
         return (
-            f"Reasoning completed for task: {task}"
+            f"Reasoning completed for task: {task}\n"
+            "Knowledge context: None"
         )
 
 

@@ -1,8 +1,8 @@
 """
-Test LIS Engine Integration Flow
+Test LIS Engine
 
 Version:
-LIS v0.7.0 - Reasoning Layer Integration
+LIS v0.8.0 - Knowledge Reasoning Integration
 """
 
 
@@ -11,19 +11,24 @@ from app.agents.task_agent import TaskAgent
 from app.trust.identity import Identity
 from app.trust.permission import Permission
 
+from app.knowledge.atom import KnowledgeAtom
+from app.knowledge.graph import KnowledgeGraph
+
 from app.integration.lis_engine import LISEngine
 
 
 
 def test_lis_engine():
     """
-    Test complete LIS execution flow.
+    Test complete LIS pipeline.
 
     Flow:
 
     Identity
         ↓
     Permission
+        ↓
+    KnowledgeGraph
         ↓
     ReasoningEngine
         ↓
@@ -33,7 +38,38 @@ def test_lis_engine():
     """
 
 
-    # Create Identity
+    # Create Knowledge Atoms
+
+    atom_1 = KnowledgeAtom(
+        atom_id="LIS-K001",
+        title="Learning Intelligence Infrastructure",
+        content="AI-Native University Platform"
+    )
+
+
+    atom_2 = KnowledgeAtom(
+        atom_id="LIS-K002",
+        title="Smart Black Box System",
+        content="SBBS Architecture"
+    )
+
+
+    # Create Knowledge Graph
+
+    graph = KnowledgeGraph()
+
+    graph.add_atom(atom_1)
+
+    graph.add_atom(atom_2)
+
+
+    graph.connect(
+        "LIS-K001",
+        "LIS-K002"
+    )
+
+
+    # Create Trust Identity
 
     identity = Identity(
         identity_id="AGENT-001",
@@ -66,29 +102,37 @@ def test_lis_engine():
     engine = LISEngine(
         agent=agent,
         identity=identity,
-        permission=permission
+        permission=permission,
+        knowledge_graph=graph
     )
 
 
-    # Execute task
+    # Execute
 
     result = engine.execute(
-        "Analyze Knowledge Graph"
+        "Analyze LIS Architecture",
+        atom_id="LIS-K001"
     )
 
 
-    # Verify Reasoning Layer
+    # Verify Knowledge Reasoning
 
     assert (
-        "Reasoning completed for task: Analyze Knowledge Graph"
+        "Reasoning completed for task: Analyze LIS Architecture"
         in result
     )
 
 
-    # Verify Agent Layer
+    assert (
+        "LIS-K002"
+        in result
+    )
+
+
+    # Verify Agent Execution
 
     assert (
-        "LIS Task Agent executed task: Analyze Knowledge Graph"
+        "LIS Task Agent executed task: Analyze LIS Architecture"
         in result
     )
 
