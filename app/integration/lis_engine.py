@@ -2,13 +2,14 @@
 LIS Engine
 
 Integration layer that coordinates
-Knowledge, Agent and Trust components.
+Trust, Reasoning and Agent components.
 """
 
 
 from app.agents.task_agent import TaskAgent
 from app.trust.identity import Identity
 from app.trust.permission import Permission
+from app.reasoning.reasoning_engine import ReasoningEngine
 
 
 class LISEngine:
@@ -23,9 +24,12 @@ class LISEngine:
         identity: Identity,
         permission: Permission
     ):
+
         self.agent = agent
         self.identity = identity
         self.permission = permission
+
+        self.reasoning = ReasoningEngine()
 
 
     def execute(
@@ -33,15 +37,17 @@ class LISEngine:
         task: str
     ) -> str:
         """
-        Execute a task through LIS workflow.
+        Execute LIS workflow.
 
-        Workflow:
+        Flow:
 
         Identity
             ↓
-        Permission Check
+        Permission
             ↓
-        Agent Execution
+        Reasoning
+            ↓
+        Agent
         """
 
 
@@ -49,4 +55,17 @@ class LISEngine:
             return "Permission denied"
 
 
-        return self.agent.execute(task)
+        reasoning_result = self.reasoning.analyze(
+            task
+        )
+
+
+        agent_result = self.agent.execute(
+            task
+        )
+
+
+        return (
+            f"{reasoning_result}\n"
+            f"{agent_result}"
+        )
