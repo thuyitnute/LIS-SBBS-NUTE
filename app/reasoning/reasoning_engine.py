@@ -35,28 +35,36 @@ class ReasoningEngine:
         Analyze task with knowledge context.
         """
 
+
         self.history.append(task)
 
-        knowledge_context = []
+
+        knowledge_context = ""
 
 
         if atom_id:
 
-            related_atoms = (
+            atom = (
                 self.knowledge_graph
-                .get_related(atom_id)
+                .get_atom(atom_id)
             )
 
-            knowledge_context.extend(
-                related_atoms
-            )
+
+            if atom:
+
+                knowledge_context = (
+                    f"ID: {atom.atom_id}\n"
+                    f"Title: {atom.title}\n"
+                    f"Content: {atom.content}\n"
+                    f"Tags: {atom.tags}"
+                )
 
 
         if knowledge_context:
 
             return (
                 f"Reasoning completed for task: {task}\n"
-                f"Knowledge context: {knowledge_context}"
+                f"Knowledge context:\n{knowledge_context}"
             )
 
 

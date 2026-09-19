@@ -14,6 +14,7 @@ class KnowledgeGraph:
     Basic graph structure for LIS knowledge relationships.
     """
 
+
     def __init__(self):
         self.atoms: Dict[str, KnowledgeAtom] = {}
         self.relationships: Dict[str, List[str]] = {}
@@ -43,3 +44,11 @@ class KnowledgeGraph:
         """
 
         return self.relationships.get(atom_id, [])
+
+
+    def get_atom(self, atom_id: str):
+        """
+        Return knowledge atom by id.
+        """
+
+        return self.atoms.get(atom_id)

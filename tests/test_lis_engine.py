@@ -2,7 +2,7 @@
 Test LIS Engine
 
 Version:
-LIS v0.8.0 - Knowledge Reasoning Integration
+LIS v0.9.0 - Knowledge Retrieval Enhancement
 """
 
 
@@ -30,6 +30,8 @@ def test_lis_engine():
         ↓
     KnowledgeGraph
         ↓
+    Knowledge Retrieval
+        ↓
     ReasoningEngine
         ↓
     TaskAgent
@@ -38,38 +40,33 @@ def test_lis_engine():
     """
 
 
-    # Create Knowledge Atoms
+    # -----------------------------
+    # Create Knowledge Layer
+    # -----------------------------
 
-    atom_1 = KnowledgeAtom(
+    atom = KnowledgeAtom(
         atom_id="LIS-K001",
         title="Learning Intelligence Infrastructure",
-        content="AI-Native University Platform"
+        content="AI-Native University Platform",
+        source="LIS Research",
+        tags=[
+            "AI",
+            "Education"
+        ]
     )
 
-
-    atom_2 = KnowledgeAtom(
-        atom_id="LIS-K002",
-        title="Smart Black Box System",
-        content="SBBS Architecture"
-    )
-
-
-    # Create Knowledge Graph
 
     graph = KnowledgeGraph()
 
-    graph.add_atom(atom_1)
 
-    graph.add_atom(atom_2)
-
-
-    graph.connect(
-        "LIS-K001",
-        "LIS-K002"
+    graph.add_atom(
+        atom
     )
 
 
-    # Create Trust Identity
+    # -----------------------------
+    # Create Trust Layer
+    # -----------------------------
 
     identity = Identity(
         identity_id="AGENT-001",
@@ -77,8 +74,6 @@ def test_lis_engine():
         entity_type="AI_AGENT"
     )
 
-
-    # Create Permission
 
     permission = Permission(
         identity_id="AGENT-001"
@@ -90,14 +85,18 @@ def test_lis_engine():
     )
 
 
-    # Create Agent
+    # -----------------------------
+    # Create Agent Layer
+    # -----------------------------
 
     agent = TaskAgent(
         "LIS Task Agent"
     )
 
 
+    # -----------------------------
     # Create LIS Engine
+    # -----------------------------
 
     engine = LISEngine(
         agent=agent,
@@ -107,7 +106,9 @@ def test_lis_engine():
     )
 
 
-    # Execute
+    # -----------------------------
+    # Execute LIS Workflow
+    # -----------------------------
 
     result = engine.execute(
         "Analyze LIS Architecture",
@@ -115,7 +116,9 @@ def test_lis_engine():
     )
 
 
-    # Verify Knowledge Reasoning
+    # -----------------------------
+    # Verify Reasoning Layer
+    # -----------------------------
 
     assert (
         "Reasoning completed for task: Analyze LIS Architecture"
@@ -123,13 +126,31 @@ def test_lis_engine():
     )
 
 
+    # -----------------------------
+    # Verify Knowledge Retrieval
+    # -----------------------------
+
     assert (
-        "LIS-K002"
+        "ID: LIS-K001"
         in result
     )
 
 
+    assert (
+        "Title: Learning Intelligence Infrastructure"
+        in result
+    )
+
+
+    assert (
+        "Content: AI-Native University Platform"
+        in result
+    )
+
+
+    # -----------------------------
     # Verify Agent Execution
+    # -----------------------------
 
     assert (
         "LIS Task Agent executed task: Analyze LIS Architecture"

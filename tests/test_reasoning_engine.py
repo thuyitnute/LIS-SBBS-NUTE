@@ -2,7 +2,7 @@
 Test LIS Reasoning Engine
 
 Version:
-LIS v0.8.0 - Knowledge Reasoning Integration
+LIS v0.9.0 - Knowledge Retrieval Enhancement
 """
 
 
@@ -15,8 +15,6 @@ from app.reasoning.reasoning_engine import ReasoningEngine
 
 def test_reasoning_engine():
 
-    # Create Knowledge Atom
-
     atom_1 = KnowledgeAtom(
         atom_id="LIS-K001",
         title="Learning Intelligence Infrastructure",
@@ -28,47 +26,24 @@ def test_reasoning_engine():
     )
 
 
-    atom_2 = KnowledgeAtom(
-        atom_id="LIS-K002",
-        title="Smart Black Box System",
-        content="SBBS Architecture",
-        tags=[
-            "Architecture"
-        ]
-    )
-
-
-    # Create Knowledge Graph
-
     graph = KnowledgeGraph()
 
 
-    graph.add_atom(atom_1)
-    graph.add_atom(atom_2)
-
-
-    graph.connect(
-        "LIS-K001",
-        "LIS-K002"
+    graph.add_atom(
+        atom_1
     )
 
-
-    # Create Reasoning Engine
 
     engine = ReasoningEngine(
         graph
     )
 
 
-    # Analyze task
-
     result = engine.analyze(
         "Analyze LIS Architecture",
         atom_id="LIS-K001"
     )
 
-
-    # Verify reasoning result
 
     assert (
         "Reasoning completed for task: Analyze LIS Architecture"
@@ -77,7 +52,19 @@ def test_reasoning_engine():
 
 
     assert (
-        "LIS-K002"
+        "ID: LIS-K001"
+        in result
+    )
+
+
+    assert (
+        "Title: Learning Intelligence Infrastructure"
+        in result
+    )
+
+
+    assert (
+        "Content: AI-Native University Platform"
         in result
     )
 
