@@ -2,7 +2,7 @@
 LIS Reasoning Engine
 
 Provides reasoning capability
-based on LIS Knowledge Graph.
+with reasoning trace support.
 """
 
 
@@ -10,11 +10,14 @@ from typing import List
 
 from app.knowledge.graph import KnowledgeGraph
 
+from app.reasoning.trace import ReasoningTrace
+
 
 
 class ReasoningEngine:
     """
-    Reasoning engine using Knowledge Graph.
+    Reasoning engine using Knowledge Graph
+    with trace recording.
     """
 
 
@@ -22,8 +25,13 @@ class ReasoningEngine:
         self,
         knowledge_graph: KnowledgeGraph
     ):
+
         self.knowledge_graph = knowledge_graph
+
         self.history: List[str] = []
+
+        self.traces: List[ReasoningTrace] = []
+
 
 
     def analyze(
@@ -32,11 +40,18 @@ class ReasoningEngine:
         atom_id: str = ""
     ) -> str:
         """
-        Analyze task with knowledge context.
+        Analyze task and create reasoning trace.
         """
 
 
-        self.history.append(task)
+        self.history.append(
+            task
+        )
+
+
+        trace = ReasoningTrace(
+            task=task
+        )
 
 
         knowledge_context = ""
@@ -52,6 +67,21 @@ class ReasoningEngine:
 
             if atom:
 
+                trace.knowledge_used.append(
+                    atom.atom_id
+                )
+
+
+                trace.add_step(
+                    "Retrieve knowledge context"
+                )
+
+
+                trace.add_step(
+                    "Analyze knowledge atom"
+                )
+
+
                 knowledge_context = (
                     f"ID: {atom.atom_id}\n"
                     f"Title: {atom.title}\n"
@@ -60,18 +90,27 @@ class ReasoningEngine:
                 )
 
 
+        trace.result = (
+            f"Reasoning completed for task: {task}"
+        )
+
+
+        self.traces.append(
+            trace
+        )
+
+
         if knowledge_context:
 
             return (
-                f"Reasoning completed for task: {task}\n"
-                f"Knowledge context:\n{knowledge_context}"
+                f"{trace.result}\n"
+                f"Knowledge context:\n"
+                f"{knowledge_context}"
             )
 
 
-        return (
-            f"Reasoning completed for task: {task}\n"
-            "Knowledge context: None"
-        )
+        return trace.result
+
 
 
     def get_history(self) -> List[str]:
@@ -80,3 +119,12 @@ class ReasoningEngine:
         """
 
         return self.history
+
+
+
+    def get_traces(self) -> List[ReasoningTrace]:
+        """
+        Return reasoning traces.
+        """
+
+        return self.traces
