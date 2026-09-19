@@ -1,194 +1,359 @@
 # LIS - Learning Intelligence Infrastructure
 
-## KIẾN TẠO - CHUẨN MỰC
+## AI-Native University Intelligence Platform
 
-### Hạ tầng trí tuệ cho Đại học AI-Native
+Version: **v0.5.0**
 
+Slogan:
 
----
-
-## 1. Giới thiệu
-
-LIS (Learning Intelligence Infrastructure) là kiến trúc hạ tầng trí tuệ
-nhằm chuyển đổi mô hình giáo dục từ quản lý việc học sang kiến tạo
-dòng chảy tri thức.
-
-LIS được phát triển theo tư duy:
-
-- AI-Native University
-- Knowledge Intelligence
-- Human-AI Collaboration
-- Smart Black Box System (SBBS)
+# KIẾN TẠO - CHUẨN MỰC
 
 
 ---
 
-## 2. Tầm nhìn
+## 1. Introduction
 
-Từ:
+LIS (Learning Intelligence Infrastructure) is an
+AI-Native learning infrastructure designed to build
+an intelligent ecosystem for education, research and knowledge management.
 
-```
-Learning Management System (LMS)
+LIS is developed based on:
 
-Quản lý:
-- Khóa học
-- Bài tập
-- Điểm số
-- Tiến độ
-```
+**Smart Black Box System (SBBS)** architecture.
 
-Đến:
+Core philosophy:
 
 ```
-Learning Intelligence Infrastructure (LIS)
+Human Intelligence
+        +
+Artificial Intelligence
+        +
+Knowledge Infrastructure
+        =
+Learning Intelligence
+```
 
-Kiến tạo:
-- Tri thức
-- Năng lực
-- Cộng đồng học tập
-- Hệ sinh thái AI
+---
+
+# 2. Vision
+
+LIS aims to become an AI-Native University Operating System.
+
+The long-term vision:
+
+```
+Knowledge Infrastructure
+
+        +
+
+AI Agent Ecosystem
+
+        +
+
+Trust Infrastructure
+
+        =
+
+AI-Native University
+```
+
+---
+
+# 3. Architecture
+
+LIS is organized into four Smart Boxes.
+
+
+```
+                    LIS Platform
+
+
+        +-----------------------------+
+
+                Core Box
+
+        +-----------------------------+
+
+              Knowledge Box
+
+        +-----------------------------+
+
+               Agent Box
+
+        +-----------------------------+
+
+               Trust Box
+
+        +-----------------------------+
 ```
 
 
 ---
 
-## 3. Kiến trúc SBBS
+# 4. Smart Box Components
 
-LIS được xây dựng theo mô hình:
+
+## 4.1 Core Box
+
+Location:
 
 ```
-LIS Platform
-
-    |
-    |
-    +-- Smart Boxes
-
-          |
-          +-- Knowledge Box
-          |
-          +-- AI Agent Box
-          |
-          +-- Learning Box
-          |
-          +-- Trust Infrastructure Box
+app/core
 ```
+
+Responsibility:
+
+- System initialization
+- Runtime management
+- Configuration
 
 
 ---
 
-## 4. Phiên bản hiện tại
+## 4.2 Knowledge Box
 
-Version:
-
-```
-v0.1.0
-```
-
-Trạng thái:
+Location:
 
 ```
-LIS Core Foundation Running
+app/knowledge
+```
+
+Current capability:
+
+```
+KnowledgeAtom
+
+        ↓
+
+KnowledgeGraph
 ```
 
 
-Bao gồm:
+Functions:
 
-- Python Runtime
-- Project Architecture
-- LIS Core Entry Point
-- Git Version Control
+- Represent knowledge entities
+- Build knowledge relationships
+- Manage knowledge structures
 
 
 ---
 
-## 5. Cấu trúc dự án
+## 4.3 AI Agent Box
+
+Location:
 
 ```
-LIS-SBBS
+app/agents
+```
+
+Current capability:
+
+```
+BaseAgent
+
+        ↓
+
+TaskAgent
+```
+
+
+Functions:
+
+- Agent identity
+- Task execution
+- Intelligent workflow foundation
+
+
+---
+
+## 4.4 Trust Box
+
+Location:
+
+```
+app/trust
+```
+
+
+Current capability:
+
+```
+Identity
+
+        +
+
+Permission
+```
+
+
+Functions:
+
+- Entity identification
+- Permission management
+- Trust foundation
+
+
+---
+
+# 5. Project Structure
+
+```
+LIS-SBBS-NUTE
 
 ├── app
-│   ├── main.py
-│   └── core
-│
+
+│   ├── core
+
+│   ├── knowledge
+
+│   │   ├── atom.py
+│   │   └── graph.py
+
+│   ├── agents
+
+│   │   ├── base_agent.py
+│   │   └── task_agent.py
+
+│   └── trust
+
+│       ├── identity.py
+│       └── permission.py
+
+
 ├── docs
-│
+
 ├── tests
-│
+
 ├── README.md
-│
+
 └── requirements.txt
 ```
 
+---
+
+# 6. Development Roadmap
+
+
+## v0.1.0
+
+Core Foundation
+
+- Python environment
+- LIS Core running
+- GitHub repository
+
+
+## v0.2.0
+
+Architecture Foundation
+
+- SBBS structure
+- Documentation layer
+
+
+## v0.3.0
+
+Knowledge Intelligence Foundation
+
+- KnowledgeAtom
+- KnowledgeGraph
+
+
+## v0.4.0
+
+AI Agent Foundation
+
+- BaseAgent
+- TaskAgent
+
+
+## v0.5.0
+
+Trust Infrastructure Foundation
+
+- Identity Model
+- Permission Model
+
+
+## Future
+
+v0.6.0
+
+Integration Layer
+
+```
+Knowledge
+    |
+Agent
+    |
+Trust
+```
 
 ---
 
-## 6. Chạy hệ thống
+# 7. Development Principles
 
-Yêu cầu:
+## Incremental Evolution
 
-- Python 3.14+
-- Virtual Environment
+LIS evolves through small validated milestones.
 
 
-Khởi động:
+## Smart Box Architecture
 
-```bash
-python app/main.py
+Each capability is developed as an independent Smart Box.
+
+
+## Open Collaboration
+
+The project is designed for community contribution.
+
+
+## Human-Centered AI
+
+AI enhances human learning and creativity.
+
+---
+
+# 8. Current Status
+
+Current Version:
+
+```
+v0.5.0
 ```
 
 
-Kết quả:
+Completed:
 
 ```
-LIS - Learning Intelligence Infrastructure
+Core Box        ✅
 
-Smart Box:
-LIS Core Foundation
+Knowledge Box   ✅
 
-Status:
-Running Successfully
+Agent Box       ✅
+
+Trust Box       ✅
 ```
 
 
----
+Next milestone:
 
-## 7. Định hướng phát triển
+```
+LIS v0.6.0
 
-Các Smart Box tương lai:
-
-- Living Book
-- AI Agent Lab
-- Knowledge Graph
-- Trust Infrastructure
-- University Operating System
-
+Integration Layer
+```
 
 ---
 
-## 8. Đóng góp cộng đồng
+# 9. License
 
-LIS hướng tới một hệ sinh thái mở:
-
-- Nhà nghiên cứu
-- Giảng viên
-- Sinh viên
-- Kỹ sư AI
-- Cộng đồng phát triển
-
-
-Mọi đóng góp đều được ghi nhận trong lịch sử phát triển.
-
+Open source project.
 
 ---
 
-## License
+# LIS
 
-Open Innovation Project
+Learning Intelligence Infrastructure
 
----
-
-Trường Đại học Sư phạm Kỹ thuật Nam Định
-
-LIS - Learning Intelligence Infrastructure
-
-KIẾN TẠO - CHUẨN MỰC
+**KIẾN TẠO - CHUẨN MỰC**
